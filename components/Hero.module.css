@@ -1,0 +1,197 @@
+/* Figma "Home" artboard: 1920 x 1017. --u is 1px at 1920 and scales with the container
+   (capped at 1920), so every coordinate below is the Figma value. */
+.outer {
+  container-type: inline-size;
+  width: 100%;
+}
+
+.stage {
+  --u: calc(min(100cqw, 1920px) / 1920);
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  max-width: 1920px;
+  height: calc(1017 * var(--u));
+  margin-inline: auto;
+  background: #fff;
+  z-index: 2; /* video About ke upar rahe */
+}
+
+/* Video ke bari hone ki jagah (desktop only). 1152 Figma px = 1102 + 978 + 89 - 1017 */
+.track {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .track {
+    display: block;
+    height: calc(1152 * min(100cqw, 1920px) / 1920);
+  }
+}
+
+/* Background texture: 1921 x 1017 at x -1, 10% opacity, hard-light, layer blur 21.4 (sigma 10.7).
+   Image placement is the Figma pattern transform. */
+.textureClip {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.texture {
+  position: absolute;
+  left: calc(-1 * var(--u));
+  top: 0;
+  width: calc(1921 * var(--u));
+  height: calc(1017 * var(--u));
+  background-image: url("/images/hero-texture.webp");
+  background-repeat: no-repeat;
+  background-size: calc(2655.4 * var(--u)) calc(1494 * var(--u));
+  background-position: calc(-590.8 * var(--u)) calc(-113.3 * var(--u));
+  opacity: 0.1;
+  mix-blend-mode: hard-light;
+  filter: blur(calc(10.7 * var(--u)));
+}
+
+.hero {
+  display: block;
+}
+
+.title {
+  position: absolute;
+  left: calc(84 * var(--u));
+  top: calc(182 * var(--u));
+  width: calc(1682.93 * var(--u));
+  margin: 0;
+  font-size: calc(164.85 * var(--u));
+  font-weight: 500;
+  line-height: calc(170.34 * var(--u));
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.line {
+  display: block;
+  white-space: nowrap;
+}
+
+.lineMiddle {
+  display: flex;
+  align-items: flex-start;
+}
+
+.pill {
+  flex: none;
+  width: calc(852 * var(--u));
+  height: calc(124 * var(--u));
+  margin-left: calc(12 * var(--u));
+  margin-top: calc(24.66 * var(--u));
+}
+
+.lasting {
+  position: relative;
+  top: calc(6 * var(--u));
+  margin-left: calc(47 * var(--u));
+}
+
+.lead {
+  position: absolute;
+  left: calc(94 * var(--u));
+  top: calc(718 * var(--u));
+  width: calc(797.71 * var(--u));
+  margin: 0;
+  font-size: calc(38 * var(--u));
+  font-weight: 400;
+  line-height: calc(59.19 * var(--u));
+  letter-spacing: -0.04em;
+  color: #000;
+}
+
+.connect {
+  position: absolute;
+  left: calc(96 * var(--u));
+  top: calc(860 * var(--u));
+}
+
+.media {
+  position: absolute;
+  left: calc(996 * var(--u));
+  top: calc(551 * var(--u));
+  width: calc(828 * var(--u));
+  height: calc(465.75 * var(--u));
+  overflow: hidden;
+  background: #330101;
+}
+
+.video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* No tablet/mobile comps supplied: below 900px the artboard becomes a simple stack that keeps
+   the same type ratios, pill and media proportions. */
+@media (max-width: 900px) {
+  .stage {
+    --pad: clamp(16px, 5vw, 96px);
+    --fs: calc((100cqw - 2 * var(--pad)) / 10.3);
+    height: auto;
+    padding-bottom: 48px;
+  }
+
+  .title,
+  .lead,
+  .connect {
+    position: static;
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px var(--pad) 0;
+  }
+
+  .title {
+    width: 100%;
+    font-size: var(--fs);
+    line-height: 1.033;
+  }
+
+  .pill {
+    width: 5.168em;
+    height: 0.752em;
+    margin-left: 0;
+    margin-top: 0.15em;
+  }
+
+  .lasting {
+    top: 0.036em;
+    margin-left: 0.285em;
+  }
+
+  .lead {
+    width: 100%;
+    margin-top: 32px;
+    font-size: clamp(18px, 4.4vw, 32px);
+    line-height: 1.558;
+  }
+
+  .connect {
+    margin-top: 28px;
+  }
+
+  .media {
+    position: relative;
+    left: auto;
+    top: auto;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 828 / 465.75;
+    margin-top: 40px;
+  }
+}
